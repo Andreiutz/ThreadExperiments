@@ -3,11 +3,14 @@ package com.company.lists;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Operations {
     private final List<Integer> numbers;
     private List<Computer> threads = new ArrayList<>();
     private final int numberOfThreads;
+    private ReentrantLock lock = new ReentrantLock();
+    private int result;
 
     public Operations(List<Integer> numbers, int numberOfThreads) {
         this.numbers = numbers;
@@ -38,6 +41,45 @@ public class Operations {
         threads.clear();
         return sum;
     }
+
+    /**
+     * Anonymous class implementation
+     */
+//    public int calculateSum() {
+//        result = 0;
+//        int numberOfElements = numbers.size();
+//        int ponderOfThread = numberOfElements / numberOfThreads;
+//        for (int i = 0; i < numberOfThreads; i++) {
+//            int start = i * ponderOfThread;
+//            int finish = i != numberOfThreads-1 ? (i+1) * ponderOfThread : numberOfElements;
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    int computedSum = 0;
+//                    for (int i = start; i < finish; i++) {
+//                        computedSum += numbers.get(i);
+//                    }
+//                    lock.lock();
+//                    try {
+//                        result += computedSum;
+//                    } finally {
+//                        lock.unlock();
+//                    }
+//
+//                }
+//            });
+//            threads.add(thread);
+//            thread.start();
+//        }
+//        for (int i = 0; i < numberOfThreads; i++) {
+//            try {
+//                threads.get(i).join();
+//            } catch (InterruptedException ignored) {
+//
+//            }
+//        }
+//        return result;
+//    }
 
     /**
      * Generic implementation of a thread which also has a numeric value associated

@@ -7,8 +7,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        List<Integer> numbers = Operations.generateRandomNumbers(10000000);
-        Operations operations = new Operations(numbers, 6);
+        List<Integer> numbers = Operations.generateRandomNumbers(100000);
+        Operations operations = new Operations(numbers, 4);
         long startTime = System.nanoTime();
         long result = operations.calculateSum();
         long elapsedTime = System.nanoTime() - startTime;
